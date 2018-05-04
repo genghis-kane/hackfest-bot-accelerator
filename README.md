@@ -1,0 +1,1 @@
+## Refer to the Hackfest documentation on [GitHub](https://github.com/develohpanda/Bot-Hackfest)

@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Bot Chat</title>
+
+    <link href="https://cdn.rawgit.com/develohpanda/Bot-Hackfest/master/botchat.css" rel="stylesheet" />
+
+    <style>
+        #BotChatGoesHere {
+            border: 1px solid #333;
+            float: left;
+            height: 600px;
+            position: relative;
+            width: 768px;
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <h1>Bot Webchat</h1>
+        <h3>For testing locally, use the Bot Emulator.</h3>
+        <p>If the DirectLine channel secret is not configured in the codebehind, the webchat will not render below. See <a href="https://github.com/develohpanda/Bot-Hackfest#directline">here</a> for instructions on configuring the DirectLine channel.</p>
+        
+        <p>The webchat is a modification on the default MS webchat that allows for recognition of a return user without the concept of a user account. <br /> If a user id exists in localstorage, that id will be used for the chat, otherwise a new id will be generated and saved. To impersonate a new user, use incognito. This modification exists in develohpanda's <a href="https://github.com/develohpanda/BotFramework-WebChat">fork</a> of the webchat and is hosted <a href="https://github.com/develohpanda/Bot-Hackfest">here</a>. This fork introduces the PersistUser property, which enables the customization. Use the original documentation, but linking to the <a href="https://github.com/develohpanda/Bot-Hackfest">hosted CDN</a> if you wish to embed this chat on your site.</p>
+    </section>
+
+    <div id="BotChatGoesHere"></div>
+
+    <script src="https://cdn.rawgit.com/develohpanda/Bot-Hackfest/master/botchat.js"></script>
+
+    <script>
+        // Navigate to your WebAppBot in Azure, and create a new DirectLine (not WebChat) channel. Copy one of the secret keys here (https://github.com/develohpanda/Bot-Hackfest#configure-directline-channel-and-webchat).
+        var secret = 'W4DOiQBMA0w.cwA.BwM.Wl8d0zRXXPQ5Ws2iQq-oRl6L9X1lFOMgr9VSY4wSClA';
+
+        if (secret !== '') {
+            BotChat.App({
+                botConnection: new BotChat.DirectLine({ secret }),
+                persistUser: true,
+                user: { id: "id", name: "User" }, // This id is irrelevant, as the id will be generated or extracted from localstorage for a returning user, because the persistUser property is true.
+                resize: 'detect'
+            }, document.getElementById("BotChatGoesHere"));
+        }
+    </script>
+</body>
+</html>
